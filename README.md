@@ -36,6 +36,7 @@ Customer ──(REST)──> Order Service ──(REST)──> Payment Service �
 - **Database:** MongoDB 8 (Mongoose 9)
 - **Message Broker:** RabbitMQ 4
 - **Logging:** Winston
+- **Testing:** Jest, Supertest, mongodb-memory-server
 - **Containerization:** Docker & Docker Compose
 
 ## Getting Started
@@ -134,6 +135,30 @@ Response (`201`):
 4. Payment Service publishes the transaction to a RabbitMQ queue (`transaction_queue`)
 5. A worker consumes the message and saves the transaction to the database
 
+## Testing
+
+Each service has automated tests using Jest + Supertest with an in-memory MongoDB instance (no Docker or external database required).
+
+### Run all tests
+
+```bash
+cd customer-service && npm test
+cd product-service && npm test
+cd order-service && npm test
+cd payment-service && npm test
+```
+
+### Test coverage
+
+| Service | Tests | What's covered |
+|---------|-------|----------------|
+| Customer Service | 4 | Health check, list customers, get by ID, 404 |
+| Product Service | 4 | Health check, list products, get by ID, 404 |
+| Order Service | 6 | Health check, create order, missing fields (400), list orders, get by ID, 404 |
+| Payment Service | 5 | Health check, process payment, missing fields (400), worker saves transaction, worker handles invalid message |
+
+Tests mock external dependencies (MongoDB via `mongodb-memory-server`, `fetch` for inter-service calls, RabbitMQ channel) so they run in complete isolation.
+
 ## Environment Variables
 
 Each service accepts these via `docker-compose.yml`:
@@ -152,6 +177,7 @@ Each service accepts these via `docker-compose.yml`:
 ecommerce-mcs/
 ├── docker-compose.yml
 ├── customer-service/
+│   ├── __tests__/       # Jest tests
 │   └── src/
 │       ├── index.ts
 │       ├── config/      # db, logger
@@ -159,6 +185,7 @@ ecommerce-mcs/
 │       ├── routes/      # GET /customers
 │       └── seed/        # Seeds default customer
 ├── product-service/
+│   ├── __tests__/       # Jest tests
 │   └── src/
 │       ├── index.ts
 │       ├── config/      # db, logger
@@ -166,12 +193,14 @@ ecommerce-mcs/
 │       ├── routes/      # GET /products
 │       └── seed/        # Seeds sample products
 ├── order-service/
+│   ├── __tests__/       # Jest tests
 │   └── src/
 │       ├── index.ts
 │       ├── config/      # db, logger
 │       ├── models/      # Order
 │       └── routes/      # POST/GET /orders
 └── payment-service/
+    ├── __tests__/       # Jest tests (routes + worker)
     └── src/
         ├── index.ts
         ├── config/      # db, logger, rabbitmq

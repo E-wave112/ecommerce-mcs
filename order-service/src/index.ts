@@ -3,7 +3,7 @@ import connectDB from "./config/db";
 import logger from "./config/logger";
 import orderRoutes from "./routes/order.routes";
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3003;
 
 app.use(express.json());

@@ -5,7 +5,7 @@ import { connectRabbitMQ } from "./config/rabbitmq";
 import paymentRoutes from "./routes/payment.routes";
 import { startWorker } from "./worker";
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3004;
 
 app.use(express.json());

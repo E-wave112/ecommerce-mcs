@@ -4,7 +4,7 @@ import logger from "./config/logger";
 import seedCustomer from "./seed/customer.seed";
 import customerRoutes from "./routes/customer.routes";
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
