@@ -1,7 +1,7 @@
-import amqplib, { type Connection, type Channel } from "amqplib";
+import amqplib, { type ChannelModel, type Channel } from "amqplib";
 import logger from "./logger";
 
-let connection: Connection | null = null;
+let connection: ChannelModel | null = null;
 let channel: Channel | null = null;
 
 const RABBITMQ_URI = process.env.RABBITMQ_URI || "amqp://localhost:5672";

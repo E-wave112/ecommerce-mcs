@@ -33,6 +33,7 @@ router.post("/", async (req: Request, res: Response) => {
       body: JSON.stringify({
         customerId,
         orderId: order._id,
+        productId,
         amount,
       }),
     });
