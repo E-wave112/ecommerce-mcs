@@ -1,0 +1,22 @@
+{
+  "name": "product-service",
+  "version": "1.0.0",
+  "description": "Product microservice for e-commerce platform",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.13.10",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
