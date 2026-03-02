@@ -1,5 +1,6 @@
 import { Schema, model, type Document } from "mongoose";
 
+/** Represents a product document in MongoDB. */
 export interface IProduct extends Document {
   name: string;
   description: string;

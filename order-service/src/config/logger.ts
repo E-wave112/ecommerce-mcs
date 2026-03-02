@@ -1,5 +1,6 @@
 import winston from "winston";
 
+/** Winston logger instance configured with timestamp, JSON format, and colorized console output. */
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || "info",
   format: winston.format.combine(

@@ -1,5 +1,6 @@
 import { Schema, model, type Document } from "mongoose";
 
+/** Represents a transaction record in MongoDB, saved by the RabbitMQ worker. */
 export interface ITransaction extends Document {
   customerId: string;
   orderId: string;
