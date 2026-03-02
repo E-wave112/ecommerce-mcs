@@ -1,4 +1,5 @@
 import amqplib, { type Connection, type Channel } from "amqplib";
+import logger from "./logger";
 
 let connection: Connection | null = null;
 let channel: Channel | null = null;
@@ -9,10 +10,10 @@ export const connectRabbitMQ = async (): Promise<Channel> => {
   try {
     connection = await amqplib.connect(RABBITMQ_URI);
     channel = await connection.createChannel();
-    console.log("Payment Service: Connected to RabbitMQ");
+    logger.info("Connected to RabbitMQ");
     return channel;
   } catch (error) {
-    console.error("Payment Service: RabbitMQ connection error:", error);
+    logger.error("RabbitMQ connection error", { error });
     process.exit(1);
   }
 };
