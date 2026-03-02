@@ -1,5 +1,6 @@
 import { Schema, model, type Document } from "mongoose";
 
+/** Represents a customer document in MongoDB. */
 export interface ICustomer extends Document {
   name: string;
   email: string;

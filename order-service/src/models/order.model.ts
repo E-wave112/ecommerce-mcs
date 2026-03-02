@@ -1,5 +1,6 @@
 import { Schema, model, type Document } from "mongoose";
 
+/** Represents an order document in MongoDB. Status defaults to "pending". */
 export interface IOrder extends Document {
   customerId: string;
   productId: string;

@@ -22,6 +22,7 @@ const products = [
   },
 ];
 
+/** Seeds sample products into the database. Idempotent — skips if products already exist. */
 const seedProducts = async (): Promise<void> => {
   const count = await Product.countDocuments();
 

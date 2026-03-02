@@ -1,6 +1,7 @@
 import { Customer } from "../models/customer.model";
 import logger from "../config/logger";
 
+/** Seeds a default customer (John Doe) into the database. Idempotent — skips if already exists. */
 const seedCustomer = async (): Promise<void> => {
   const existingCustomer = await Customer.findOne({ email: "john.doe@example.com" });
 

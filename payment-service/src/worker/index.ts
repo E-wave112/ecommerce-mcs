@@ -4,6 +4,7 @@ import logger from "../config/logger";
 
 const QUEUE_NAME = "transaction_queue";
 
+/** Starts a RabbitMQ consumer that saves incoming transaction messages to MongoDB. */
 export const startWorker = async (channel: Channel): Promise<void> => {
   await channel.assertQueue(QUEUE_NAME, { durable: true });
   channel.prefetch(1);
