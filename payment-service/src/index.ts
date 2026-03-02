@@ -1,6 +1,7 @@
 import express from "express";
-import connectDB from "./config/db.js";
-import { connectRabbitMQ } from "./config/rabbitmq.js";
+import connectDB from "./config/db";
+import logger from "./config/logger";
+import { connectRabbitMQ } from "./config/rabbitmq";
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -15,7 +16,7 @@ const start = async (): Promise<void> => {
   await connectDB();
   await connectRabbitMQ();
   app.listen(PORT, () => {
-    console.log(`Payment Service running on port ${PORT}`);
+    logger.info(`Server running on port ${PORT}`);
   });
 };
 

@@ -1,5 +1,6 @@
 import express from "express";
-import connectDB from "./config/db.js";
+import connectDB from "./config/db";
+import logger from "./config/logger";
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -13,7 +14,7 @@ app.get("/health", (_req, res) => {
 const start = async (): Promise<void> => {
   await connectDB();
   app.listen(PORT, () => {
-    console.log(`Product Service running on port ${PORT}`);
+    logger.info(`Server running on port ${PORT}`);
   });
 };
 
